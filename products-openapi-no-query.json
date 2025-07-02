@@ -1,0 +1,89 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MindKits Product API",
+    "version": "1.0.0",
+    "description": "API tool for retrieving the full list of products from MindKits."
+  },
+  "servers": [
+    {
+      "url": "https://www.mindkits.co.nz/api/v1"
+    }
+  ],
+  "paths": {
+    "/products.json": {
+      "get": {
+        "summary": "Retrieve full product list",
+        "description": "Returns a list of all available products.",
+        "operationId": "getProducts",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "A list of products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total_count": {
+                      "type": "integer"
+                    },
+                    "next_page": {
+                      "type": "string"
+                    },
+                    "products": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "item_number": {
+                            "type": "string"
+                          },
+                          "item_name": {
+                            "type": "string"
+                          },
+                          "price": {
+                            "type": "number"
+                          },
+                          "quantity_on_hand": {
+                            "type": "integer"
+                          },
+                          "url_rewrite": {
+                            "type": "string"
+                          },
+                          "long_description_1": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing token"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-AC-Auth-Token"
+      }
+    }
+  }
+}

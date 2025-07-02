@@ -1,0 +1,99 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MindKits Product API",
+    "version": "1.0.1",
+    "description": "API for retrieving product listings from MindKits"
+  },
+  "servers": [
+    {
+      "url": "https://www.mindkits.co.nz/api/v1"
+    }
+  ],
+  "paths": {
+    "/products.json": {
+      "get": {
+        "summary": "Get Product List",
+        "description": "Returns a list of available products with metadata.",
+        "operationId": "getProducts",
+        "responses": {
+          "200": {
+            "description": "A wrapped object containing product list and metadata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total_count": {
+                      "type": "integer"
+                    },
+                    "next_page": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "products": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "item_number": {
+                            "type": "string"
+                          },
+                          "item_name": {
+                            "type": "string"
+                          },
+                          "price": {
+                            "type": "number"
+                          },
+                          "quantity_on_hand": {
+                            "type": "integer"
+                          },
+                          "url_rewrite": {
+                            "type": "string"
+                          },
+                          "long_description_1": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "item_number",
+                          "item_name",
+                          "price"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "total_count",
+                    "products"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-AC-Auth-Token"
+      }
+    }
+  }
+}

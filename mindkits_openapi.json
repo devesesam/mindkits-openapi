@@ -1,0 +1,188 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "MindKits Storefront API",
+    "description": "Access product data, variants, inventory, and curated lists from the MindKits online store.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://www.mindkits.co.nz/api/v1"
+    }
+  ],
+  "paths": {
+    "/products": {
+      "get": {
+        "summary": "Get all products",
+        "description": "Returns all products with optional pagination.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Items per page",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of products"
+          }
+        }
+      }
+    },
+    "/products/{product_id}": {
+      "get": {
+        "summary": "Get product by ID",
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product details"
+          }
+        }
+      }
+    },
+    "/product_lists": {
+      "get": {
+        "summary": "Get product lists",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "items"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of product collections"
+          }
+        }
+      }
+    },
+    "/product_variants": {
+      "get": {
+        "summary": "Get variants for a product",
+        "parameters": [
+          {
+            "name": "filters[product_id]",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of product variants"
+          }
+        }
+      }
+    },
+    "/variant_inventory": {
+      "get": {
+        "summary": "Get variant inventory",
+        "parameters": [
+          {
+            "name": "filters[product_id]",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Variant inventory details"
+          }
+        }
+      }
+    },
+    "/product_statuses": {
+      "get": {
+        "summary": "Get product statuses",
+        "responses": {
+          "200": {
+            "description": "Product status list"
+          }
+        }
+      }
+    },
+    "/product_pictures": {
+      "get": {
+        "summary": "Get product pictures",
+        "parameters": [
+          {
+            "name": "filters[product_id]",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product image metadata"
+          }
+        }
+      }
+    },
+    "/product_pricing": {
+      "get": {
+        "summary": "Get product pricing",
+        "parameters": [
+          {
+            "name": "filters[product_id]",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pricing information"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-AC-Auth-Token"
+      }
+    }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ]
+}

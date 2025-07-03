@@ -1,0 +1,55 @@
+{
+  "title": "MindKits Storefront API",
+  "description": "Access product data, variants, inventory, and curated lists from the MindKits online store.",
+  "auth": {
+    "type": "header",
+    "key": "X-AC-Auth-Token",
+    "value": "5ff793a4072fc4482937a02cfbd802a6"
+  },
+  "baseUrl": "https://www.mindkits.co.nz/api/v1",
+  "headers": {
+    "Accept": "application/json"
+  },
+  "endpoints": {
+    "getProducts": {
+      "method": "GET",
+      "url": "/products",
+      "description": "Get all products. Supports pagination via ?page=1&per_page=20"
+    },
+    "getProductById": {
+      "method": "GET",
+      "url": "/products/:product_id",
+      "description": "Get detailed info for a product by ID."
+    },
+    "getProductLists": {
+      "method": "GET",
+      "url": "/product_lists?expand=items",
+      "description": "Get curated product lists with product IDs."
+    },
+    "getProductVariantsByProductId": {
+      "method": "GET",
+      "url": "/product_variants?filters[product_id]=:product_id",
+      "description": "Get variants for a product."
+    },
+    "getVariantInventoryByProductId": {
+      "method": "GET",
+      "url": "/variant_inventory?filters[product_id]=:product_id",
+      "description": "Get variant inventory for a product."
+    },
+    "getProductStatuses": {
+      "method": "GET",
+      "url": "/product_statuses",
+      "description": "Get product statuses like 'Stocked', 'Out of Stock', etc."
+    },
+    "getProductPictures": {
+      "method": "GET",
+      "url": "/product_pictures?filters[product_id]=:product_id",
+      "description": "Get product pictures (if available)."
+    },
+    "getProductPricing": {
+      "method": "GET",
+      "url": "/product_pricing?filters[product_id]=:product_id",
+      "description": "Get pricing info for a product (if supported)."
+    }
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MindKits API - Full Response Schema",
+    "version": "1.1.1",
+    "description": "Schema updated with full response structures for Tawk compatibility, including getProducts."
+  },
+  "servers": [
+    {
+      "url": "https://www.mindkits.co.nz/api/v1"
+    }
+  ],
+  "paths": {
+    "/products": {
+      "get": {
+        "summary": "Get Products",
+        "operationId": "getProducts",
+        "responses": {
+          "200": {
+            "description": "List of products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total_count": {
+                      "type": "integer"
+                    },
+                    "products": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "item_number": {
+                            "type": "string"
+                          },
+                          "manufacturer_id": {
+                            "type": "integer"
+                          },
+                          "manufacturer_part_number": {
+                            "type": "string"
+                          },
+                          "primary_category_id": {
+                            "type": "integer"
+                          },
+                          "product_status_id": {
+                            "type": "integer"
+                          },
+                          "item_name": {
+                            "type": "string"
+                          },
+                          "price": {
+                            "type": "number"
+                          },
+                          "cost": {
+                            "type": "number"
+                          },
+                          "retail": {
+                            "type": "number"
+                          },
+                          "quantity_on_hand": {
+                            "type": "integer"
+                          },
+                          "short_description": {
+                            "type": "string"
+                          },
+                          "long_description_1": {
+                            "type": "string"
+                          },
+                          "created_at": {
+                            "type": "string"
+                          },
+                          "updated_at": {
+                            "type": "string"
+                          },
+                          "url_rewrite": {
+                            "type": "string"
+                          },
+                          "is_discontinued": {
+                            "type": "boolean"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-AC-Auth-Token"
+      }
+    }
+  }
+}

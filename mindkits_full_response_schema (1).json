@@ -1,0 +1,384 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MindKits API - Full Response Schema",
+    "version": "1.1.0",
+    "description": "Schema updated with full response structures for Tawk compatibility."
+  },
+  "servers": [
+    {
+      "url": "https://www.mindkits.co.nz/api/v1"
+    }
+  ],
+  "paths": {
+    "/product_lists": {
+      "get": {
+        "summary": "Get ProductLists",
+        "operationId": "getProductLists",
+        "responses": {
+          "200": {
+            "description": "List of product_lists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total_count": {
+                      "type": "integer"
+                    },
+                    "product_lists": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "name": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/product_pictures": {
+      "get": {
+        "summary": "Get ProductPictures",
+        "operationId": "getProductPictures",
+        "responses": {
+          "200": {
+            "description": "List of product_pictures",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total_count": {
+                      "type": "integer"
+                    },
+                    "product_pictures": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "product_id": {
+                            "type": "integer"
+                          },
+                          "image_file": {
+                            "type": "string"
+                          },
+                          "alt": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "is_primary": {
+                            "type": "boolean"
+                          },
+                          "is_hidden": {
+                            "type": "boolean"
+                          },
+                          "thumbnail_file": {
+                            "type": "string"
+                          },
+                          "sort_order": {
+                            "type": "integer"
+                          },
+                          "flash_path": {
+                            "type": "string"
+                          },
+                          "created_at": {
+                            "type": "string"
+                          },
+                          "updated_at": {
+                            "type": "string"
+                          },
+                          "is_video_screen_shot": {
+                            "type": "boolean"
+                          },
+                          "video_content": {
+                            "type": "string"
+                          },
+                          "download_external_image": {
+                            "type": "boolean"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/product_pricing": {
+      "get": {
+        "summary": "Get ProductPricing",
+        "operationId": "getProductPricing",
+        "responses": {
+          "200": {
+            "description": "List of product_pricing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total_count": {
+                      "type": "integer"
+                    },
+                    "product_pricing": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "product_id": {
+                            "type": "integer"
+                          },
+                          "store_id": {
+                            "type": "integer"
+                          },
+                          "customer_type_id": {
+                            "type": "integer"
+                          },
+                          "variant_inventory_id": {
+                            "type": "integer"
+                          },
+                          "sale_type_id": {
+                            "type": "integer"
+                          },
+                          "start_date": {
+                            "type": "string"
+                          },
+                          "end_date": {
+                            "type": "string"
+                          },
+                          "starting_quantity": {
+                            "type": "integer"
+                          },
+                          "price": {
+                            "type": "number"
+                          },
+                          "cost": {
+                            "type": "number"
+                          },
+                          "updated_at": {
+                            "type": "string"
+                          },
+                          "created_at": {
+                            "type": "string"
+                          },
+                          "price_calculation_id": {
+                            "type": "integer"
+                          },
+                          "variant_id": {
+                            "type": "integer"
+                          },
+                          "variant_price_surcharge": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/product_statuses": {
+      "get": {
+        "summary": "Get ProductStatuses",
+        "operationId": "getProductStatuses",
+        "responses": {
+          "200": {
+            "description": "List of product_statuses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total_count": {
+                      "type": "integer"
+                    },
+                    "product_statuses": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "time_frame": {
+                            "type": "string"
+                          },
+                          "is_unavailable": {
+                            "type": "boolean"
+                          },
+                          "is_hidden": {
+                            "type": "boolean"
+                          },
+                          "is_back_ordered": {
+                            "type": "boolean"
+                          },
+                          "show_quantity": {
+                            "type": "boolean"
+                          },
+                          "updated_at": {
+                            "type": "string"
+                          },
+                          "created_at": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/product_variants": {
+      "get": {
+        "summary": "Get ProductVariants",
+        "operationId": "getProductVariants",
+        "responses": {
+          "200": {
+            "description": "List of product_variants",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total_count": {
+                      "type": "integer"
+                    },
+                    "product_variants": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "product_id": {
+                            "type": "integer"
+                          },
+                          "variant_group_id": {
+                            "type": "integer"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "price_adjustment": {
+                            "type": "number"
+                          },
+                          "price_adjustment_type": {
+                            "type": "string"
+                          },
+                          "sort_order": {
+                            "type": "integer"
+                          },
+                          "item_number_extension": {
+                            "type": "string"
+                          },
+                          "item_number_sort_order": {
+                            "type": "integer"
+                          },
+                          "is_hidden": {
+                            "type": "boolean"
+                          },
+                          "weight": {
+                            "type": "number"
+                          },
+                          "weight_type": {
+                            "type": "string"
+                          },
+                          "updated_at": {
+                            "type": "string"
+                          },
+                          "created_at": {
+                            "type": "string"
+                          },
+                          "is_default_selection": {
+                            "type": "boolean"
+                          },
+                          "swatch_file": {
+                            "type": "string"
+                          },
+                          "swatch_thumbnail": {
+                            "type": "string"
+                          },
+                          "swatch_thumbnail_color": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-AC-Auth-Token"
+      }
+    }
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "title": "MindKits Storefront API",
+  "description": "Access product data, variants, inventory, and curated lists from the MindKits online store.",
+  "auth": {
+    "type": "header",
+    "key": "X-AC-Auth-Token",
+    "value": "5ff793a4072fc4482937a02cfbd802a6"
+  },
+  "baseUrl": "https://www.mindkits.co.nz/api/v1",
+  "headers": {
+    "Accept": "application/json"
+  },
+  "endpoints": [
+    {
+      "key": "getProducts",
+      "method": "GET",
+      "url": "/products",
+      "description": "Get all products. Supports pagination.",
+      "queryParams": [
+        {
+          "name": "page",
+          "required": false
+        },
+        {
+          "name": "per_page",
+          "required": false
+        }
+      ]
+    },
+    {
+      "key": "getProductById",
+      "method": "GET",
+      "url": "/products/{product_id}",
+      "description": "Get product details by ID.",
+      "pathParams": [
+        {
+          "name": "product_id",
+          "required": true
+        }
+      ]
+    },
+    {
+      "key": "getProductLists",
+      "method": "GET",
+      "url": "/product_lists",
+      "description": "Get curated product lists.",
+      "queryParams": [
+        {
+          "name": "expand",
+          "required": false
+        }
+      ]
+    },
+    {
+      "key": "getProductPictures",
+      "method": "GET",
+      "url": "/product_pictures",
+      "description": "Get product pictures by product ID.",
+      "queryParams": [
+        {
+          "name": "filters[product_id]",
+          "required": true
+        }
+      ]
+    },
+    {
+      "key": "getProductPricing",
+      "method": "GET",
+      "url": "/product_pricing",
+      "description": "Get pricing info for a product.",
+      "queryParams": [
+        {
+          "name": "filters[product_id]",
+          "required": true
+        }
+      ]
+    },
+    {
+      "key": "getProductStatuses",
+      "method": "GET",
+      "url": "/product_statuses",
+      "description": "Get all product statuses."
+    },
+    {
+      "key": "getProductVariants",
+      "method": "GET",
+      "url": "/product_variants",
+      "description": "Get product variants by product ID.",
+      "queryParams": [
+        {
+          "name": "filters[product_id]",
+          "required": true
+        }
+      ]
+    },
+    {
+      "key": "getVariantInventory",
+      "method": "GET",
+      "url": "/variant_inventory",
+      "description": "Get variant inventory by product ID.",
+      "queryParams": [
+        {
+          "name": "filters[product_id]",
+          "required": true
+        }
+      ]
+    }
+  ]
+}

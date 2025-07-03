@@ -1,0 +1,166 @@
+
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MindKits Storefront API",
+    "version": "1.0.0",
+    "description": "Tawk-compatible schema including all required product-related endpoints."
+  },
+  "servers": [
+    {
+      "url": "https://www.mindkits.co.nz/api/v1"
+    }
+  ],
+  "paths": {
+    "/product_lists": {
+      "get": {
+        "summary": "Get Product Lists",
+        "description": "Retrieves an array of product lists.",
+        "operationId": "getProductLists",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "Expand response to include items",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of product lists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total_count": {
+                      "type": "integer"
+                    },
+                    "product_lists": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": { "type": "integer" },
+                          "name": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [ { "ApiKeyAuth": [] } ]
+      }
+    },
+    "/product_pictures": {
+      "get": {
+        "summary": "Get Product Pictures",
+        "description": "Retrieves an array of product pictures.",
+        "operationId": "getProductPictures",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "A list of product pictures",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total_count": { "type": "integer" },
+                    "product_pictures": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": { "type": "integer" },
+                          "product_id": { "type": "integer" },
+                          "image_file": { "type": "string" },
+                          "alt": { "type": "string" },
+                          "description": { "type": "string" },
+                          "is_primary": { "type": "boolean" },
+                          "is_hidden": { "type": "boolean" },
+                          "thumbnail_file": { "type": "string" },
+                          "sort_order": { "type": "integer" },
+                          "flash_path": { "type": "string" },
+                          "created_at": { "type": "string" },
+                          "updated_at": { "type": "string" },
+                          "is_video_screen_shot": { "type": "boolean" },
+                          "video_content": { "type": "string" },
+                          "download_external_image": { "type": "boolean" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [ { "ApiKeyAuth": [] } ]
+      }
+    },
+    "/product_pricing": {
+      "get": {
+        "summary": "Get Product Pricing",
+        "description": "Retrieves an array of product pricing.",
+        "operationId": "getProductPricing",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "A list of product pricing information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total_count": { "type": "string" },
+                    "product_pricing": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": { "type": "integer" },
+                          "product_id": { "type": "integer" },
+                          "store_id": { "type": "integer" },
+                          "customer_type_id": { "type": "integer" },
+                          "variant_inventory_id": { "type": "integer" },
+                          "sale_type_id": { "type": "integer" },
+                          "start_date": { "type": "string" },
+                          "end_date": { "type": "string" },
+                          "starting_quantity": { "type": "number" },
+                          "price": { "type": "number" },
+                          "cost": { "type": "number" },
+                          "updated_at": { "type": "string" },
+                          "created_at": { "type": "string" },
+                          "price_calculation_id": { "type": "integer" },
+                          "variant_id": { "type": "integer" },
+                          "variant_price_surcharge": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [ { "ApiKeyAuth": [] } ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-AC-Auth-Token"
+      }
+    }
+  }
+}

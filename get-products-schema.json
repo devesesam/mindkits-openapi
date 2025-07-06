@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "MindKits Product Search",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "Allows Tawk AI to search MindKits products by keyword using a GET request."
   },
   "paths": {
@@ -19,6 +19,14 @@
             },
             "required": true,
             "description": "Keyword to search product names (e.g., 'Bambu', 'adapter')."
+          }
+        ],
+        "x-tawk-parameters": [
+          {
+            "name": "keywords",
+            "type": "text",
+            "required": true,
+            "description": "What kind of product is the customer looking for?"
           }
         ],
         "responses": {

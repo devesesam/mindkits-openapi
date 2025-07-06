@@ -2,33 +2,28 @@
   "openapi": "3.0.0",
   "info": {
     "title": "MindKits Product Search",
-    "version": "1.0.0",
-    "description": "API tool to search and retrieve product data from Cart.com via Netlify middleware."
+    "version": "1.1.0",
+    "description": "Allows Tawk AI to search MindKits products by keyword using a GET request."
   },
   "paths": {
     "/get-products": {
-      "post": {
-        "summary": "Search Products",
+      "get": {
+        "summary": "Find products by keyword",
         "operationId": "getProducts",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "search": {
-                    "type": "string",
-                    "description": "Keyword or phrase to search for in product names."
-                  }
-                }
-              }
-            }
+        "parameters": [
+          {
+            "in": "query",
+            "name": "keywords",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Keyword to search product names (e.g., 'Bambu', 'adapter')."
           }
-        },
+        ],
         "responses": {
           "200": {
-            "description": "Product search results",
+            "description": "List of matching products",
             "content": {
               "application/json": {
                 "schema": {

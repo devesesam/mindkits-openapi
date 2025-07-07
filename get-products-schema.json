@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "MindKits Product Search",
-    "version": "1.2.2",
-    "description": "Allows Tawk AI to search MindKits products by keyword using a GET request. v2"
+    "version": "1.3.0",
+    "description": "Allows Tawk AI to search MindKits products by keyword using a POST request with a JSON body."
   },
   "servers": [
     {
@@ -12,20 +12,26 @@
   ],
   "paths": {
     "/get-products": {
-      "get": {
+      "post": {
         "summary": "Find products by keyword",
         "operationId": "getProducts",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "query",
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "description": "Keyword to search product names (e.g., 'Bambu', 'adapter')."
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "search": {
+                    "type": "string",
+                    "description": "Keyword to search for in product name or description (e.g., 'adapter', 'Bambu')."
+                  }
+                },
+                "required": ["search"]
+              }
+            }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "List of matching products",
@@ -58,6 +64,12 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }

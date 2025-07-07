@@ -3,7 +3,7 @@
   "info": {
     "title": "MindKits Product Search",
     "version": "1.2.2",
-    "description": "Allows Tawk AI to search MindKits products by keyword using a GET request."
+    "description": "Allows Tawk AI to search MindKits products by keyword using a GET request. v2"
   },
   "servers": [
     {

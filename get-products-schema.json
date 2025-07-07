@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "MindKits Product Search",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "description": "Allows Tawk AI to search MindKits products by keyword using a GET request."
   },
   "servers": [
@@ -18,7 +18,7 @@
         "parameters": [
           {
             "in": "query",
-            "name": "keywords",
+            "name": "query",
             "schema": {
               "type": "string"
             },

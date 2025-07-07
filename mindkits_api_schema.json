@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "MindKits Product Search",
-    "version": "1.3.0",
-    "description": "Allows Tawk AI to search MindKits products by keyword using a POST request with a JSON body."
+    "version": "1.3.1",
+    "description": "Allows Tawk AI to search MindKits products by keyword using a POST request with a JSON body. The response is simplified for better understanding."
   },
   "servers": [
     {
@@ -34,7 +34,7 @@
         },
         "responses": {
           "200": {
-            "description": "List of matching products",
+            "description": "List of matching products (simplified format)",
             "content": {
               "application/json": {
                 "schema": {
@@ -43,21 +43,17 @@
                     "total_count": {
                       "type": "integer"
                     },
-                    "products": {
+                    "entries": {
                       "type": "array",
                       "items": {
                         "type": "object",
                         "properties": {
-                          "id": {
-                            "type": "integer"
-                          },
-                          "item_name": {
-                            "type": "string"
-                          },
-                          "price": {
-                            "type": "number"
-                          }
-                        }
+                          "title": { "type": "string" },
+                          "price": { "type": "number" },
+                          "url": { "type": "string", "format": "uri" },
+                          "description": { "type": "string" }
+                        },
+                        "required": ["title", "price", "url"]
                       }
                     }
                   }
@@ -65,12 +61,8 @@
               }
             }
           },
-          "400": {
-            "description": "Invalid request body"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
+          "400": { "description": "Invalid request body" },
+          "500": { "description": "Internal server error" }
         }
       }
     }

@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "MindKits Product Search",
-    "version": "1.3.0",
-    "description": "Search MindKits products by keyword using GET or POST."
+    "version": "1.2.1",
+    "description": "Allows Tawk AI to search MindKits products by keyword using a GET request."
   },
   "servers": [
     {
@@ -13,8 +13,8 @@
   "paths": {
     "/get-products": {
       "get": {
-        "summary": "Search for products by keyword (GET)",
-        "operationId": "getProductsGET",
+        "summary": "Find products by keyword",
+        "operationId": "getProducts",
         "parameters": [
           {
             "in": "query",
@@ -23,15 +23,7 @@
               "type": "string"
             },
             "required": true,
-            "description": "Keyword to search for in product names or descriptions."
-          }
-        ],
-        "x-tawk-parameters": [
-          {
-            "name": "keywords",
-            "type": "text",
-            "required": true,
-            "description": "What product is the customer looking for?"
+            "description": "Keyword to search product names (e.g., 'Bambu', 'adapter')."
           }
         ],
         "responses": {
@@ -50,66 +42,15 @@
                       "items": {
                         "type": "object",
                         "properties": {
-                          "id": { "type": "integer" },
-                          "item_name": { "type": "string" },
-                          "price": { "type": "number" }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Search for products by keyword (POST)",
-        "operationId": "getProductsPOST",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "search": {
-                    "type": "string",
-                    "description": "Keyword to search for"
-                  }
-                },
-                "required": ["search"]
-              }
-            }
-          }
-        },
-        "x-tawk-parameters": [
-          {
-            "name": "search",
-            "type": "text",
-            "required": true,
-            "description": "What kind of product is the customer looking for?"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of matching products",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "total_count": {
-                      "type": "integer"
-                    },
-                    "products": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": { "type": "integer" },
-                          "item_name": { "type": "string" },
-                          "price": { "type": "number" }
+                          "id": {
+                            "type": "integer"
+                          },
+                          "item_name": {
+                            "type": "string"
+                          },
+                          "price": {
+                            "type": "number"
+                          }
                         }
                       }
                     }

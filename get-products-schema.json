@@ -3,20 +3,22 @@
   "info": {
     "title": "MindKits Product Search",
     "version": "1.3.0",
-    "description": "Allows Tawk AI to search MindKits products by keyword using GET or POST."
+    "description": "Allows Tawk AI to search MindKits products by keyword using GET or POST requests."
   },
   "paths": {
     "/get-products": {
       "get": {
         "summary": "Find products by keyword (GET)",
-        "operationId": "getProductsGet",
+        "operationId": "getProducts",
         "parameters": [
           {
             "in": "query",
             "name": "keywords",
-            "schema": { "type": "string" },
+            "schema": {
+              "type": "string"
+            },
             "required": true,
-            "description": "What keyword should we search for?"
+            "description": "Keyword to search products (e.g., 'Bambu', 'adapter')"
           }
         ],
         "x-tawk-parameters": [
@@ -35,15 +37,23 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "total_count": { "type": "integer" },
+                    "total_count": {
+                      "type": "integer"
+                    },
                     "products": {
                       "type": "array",
                       "items": {
                         "type": "object",
                         "properties": {
-                          "id": { "type": "integer" },
-                          "item_name": { "type": "string" },
-                          "price": { "type": "number" }
+                          "id": {
+                            "type": "integer"
+                          },
+                          "item_name": {
+                            "type": "string"
+                          },
+                          "price": {
+                            "type": "number"
+                          }
                         }
                       }
                     }
@@ -56,7 +66,7 @@
       },
       "post": {
         "summary": "Find products by keyword (POST)",
-        "operationId": "getProductsPost",
+        "operationId": "postGetProducts",
         "requestBody": {
           "required": true,
           "content": {
@@ -66,7 +76,7 @@
                 "properties": {
                   "search": {
                     "type": "string",
-                    "description": "The keyword to search for."
+                    "description": "Keyword to search products (e.g., 'Bambu', 'adapter')"
                   }
                 },
                 "required": ["search"]
@@ -74,14 +84,6 @@
             }
           }
         },
-        "x-tawk-parameters": [
-          {
-            "name": "search",
-            "type": "text",
-            "required": true,
-            "description": "What kind of product is the customer looking for?"
-          }
-        ],
         "responses": {
           "200": {
             "description": "List of matching products",
@@ -90,15 +92,23 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "total_count": { "type": "integer" },
+                    "total_count": {
+                      "type": "integer"
+                    },
                     "products": {
                       "type": "array",
                       "items": {
                         "type": "object",
                         "properties": {
-                          "id": { "type": "integer" },
-                          "item_name": { "type": "string" },
-                          "price": { "type": "number" }
+                          "id": {
+                            "type": "integer"
+                          },
+                          "item_name": {
+                            "type": "string"
+                          },
+                          "price": {
+                            "type": "number"
+                          }
                         }
                       }
                     }

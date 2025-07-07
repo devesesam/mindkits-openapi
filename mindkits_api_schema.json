@@ -1,98 +1,78 @@
 {
-  "title": "MindKits Storefront API",
-  "description": "Access product data, variants, inventory, and curated lists from the MindKits online store.",
-  "auth": {
-    "type": "header",
-    "key": "X-AC-Auth-Token",
-    "value": "5ff793a4072fc4482937a02cfbd802a6"
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MindKits Product Search",
+    "version": "1.3.0",
+    "description": "Allows Tawk AI to search MindKits products by keyword using a POST request with a JSON body."
   },
-  "baseUrl": "https://www.mindkits.co.nz/api/v1",
-  "headers": {
-    "Accept": "application/json"
-  },
-  "endpoints": [
+  "servers": [
     {
-      "key": "getProducts",
-      "method": "GET",
-      "url": "/products",
-      "description": "Get all products. Supports pagination and filters like ?page=1&per_page=20"
-    },
-    {
-      "key": "getProductById",
-      "method": "GET",
-      "url": "/products/{product_id}",
-      "description": "Get detailed info for a product by ID.",
-      "pathParams": [
-        {
-          "name": "product_id",
-          "type": "integer",
-          "required": true
-        }
-      ]
-    },
-    {
-      "key": "getProductLists",
-      "method": "GET",
-      "url": "/product_lists?expand=items",
-      "description": "Get curated product lists with product IDs."
-    },
-    {
-      "key": "getProductVariantsByProductId",
-      "method": "GET",
-      "url": "/product_variants?filters[product_id]={product_id}",
-      "description": "Get variants for a product.",
-      "pathParams": [
-        {
-          "name": "product_id",
-          "type": "integer",
-          "required": true
-        }
-      ]
-    },
-    {
-      "key": "getVariantInventoryByProductId",
-      "method": "GET",
-      "url": "/variant_inventory?filters[product_id]={product_id}",
-      "description": "Get variant inventory for a product.",
-      "pathParams": [
-        {
-          "name": "product_id",
-          "type": "integer",
-          "required": true
-        }
-      ]
-    },
-    {
-      "key": "getProductStatuses",
-      "method": "GET",
-      "url": "/product_statuses",
-      "description": "Get product statuses like 'Stocked', 'Out of Stock', etc."
-    },
-    {
-      "key": "getProductPictures",
-      "method": "GET",
-      "url": "/product_pictures?filters[product_id]={product_id}",
-      "description": "Get product pictures (if endpoint supported).",
-      "pathParams": [
-        {
-          "name": "product_id",
-          "type": "integer",
-          "required": true
-        }
-      ]
-    },
-    {
-      "key": "getProductPricing",
-      "method": "GET",
-      "url": "/product_pricing?filters[product_id]={product_id}",
-      "description": "Get pricing info for a product (if supported).",
-      "pathParams": [
-        {
-          "name": "product_id",
-          "type": "integer",
-          "required": true
-        }
-      ]
+      "url": "https://storied-mandazi-dfbdb4.netlify.app/.netlify/functions"
     }
-  ]
+  ],
+  "paths": {
+    "/get-products": {
+      "post": {
+        "summary": "Find products by keyword",
+        "operationId": "getProducts",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "search": {
+                    "type": "string",
+                    "description": "Keyword to search for in product name or description (e.g., 'adapter', 'Bambu')."
+                  }
+                },
+                "required": ["search"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "List of matching products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total_count": {
+                      "type": "integer"
+                    },
+                    "products": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "item_name": {
+                            "type": "string"
+                          },
+                          "price": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  }
 }

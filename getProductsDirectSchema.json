@@ -3,7 +3,7 @@
   "info": {
     "title": "MindKits Product Search (Direct)",
     "version": "1.0.0",
-    "description": "Search MindKits products by keyword. This tool allows Tawk to pass a search term and receive up to 10 matching products."
+    "description": "Search products directly from Cart.com's API by product name using the 'like' operator. Tawk can pass in a keyword like 'bambu' and get a filtered list of results."
   },
   "servers": [
     {
@@ -13,23 +13,23 @@
   "paths": {
     "/products": {
       "get": {
-        "summary": "Search for products by keyword",
+        "summary": "Find products by name keyword",
         "operationId": "getProducts",
         "parameters": [
           {
-            "name": "$filter",
+            "name": "item_name",
             "in": "query",
-            "description": "Search filter using Cart.com filter syntax, e.g., `contains(item_name,'bambu')`",
             "required": true,
+            "description": "Keyword to search in the product name. Use `like:` syntax (e.g. like:bambu).",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "like:bambu"
             }
           },
           {
             "name": "per_page",
             "in": "query",
-            "description": "Number of products to return",
-            "required": false,
+            "description": "Number of results per page",
             "schema": {
               "type": "integer",
               "default": 10
@@ -38,8 +38,7 @@
           {
             "name": "page",
             "in": "query",
-            "description": "Page number",
-            "required": false,
+            "description": "Page number of results",
             "schema": {
               "type": "integer",
               "default": 1
@@ -80,14 +79,11 @@
               }
             }
           },
-          "400": {
-            "description": "Invalid search query"
-          },
           "401": {
-            "description": "Unauthorized — missing or invalid API key"
+            "description": "Unauthorized (API key missing or invalid)"
           },
           "500": {
-            "description": "Server error"
+            "description": "Internal server error"
           }
         },
         "security": [

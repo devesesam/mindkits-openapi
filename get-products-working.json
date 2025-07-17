@@ -1,0 +1,91 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MindKits Product Search (Direct GET)",
+    "version": "1.0.0",
+    "description": "Allows Tawk AI to search MindKits products by name using a GET request and Cart.com's advanced query syntax. This avoids using POST and works directly with the external API."
+  },
+  "servers": [
+    {
+      "url": "https://www.mindkits.co.nz/api/v1"
+    }
+  ],
+  "paths": {
+    "/products": {
+      "get": {
+        "summary": "Search products by keyword using Cart.com query syntax",
+        "operationId": "getProductsDirect",
+        "parameters": [
+          {
+            "name": "item_name",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "like:bambu+AND+like:printer"
+            },
+            "description": "Search string using Cart.com filter syntax. Use `like:` before each keyword. Join multiple words with `+AND+` or `+OR+`. Example: `like:bambu+AND+like:printer`."
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 100
+            },
+            "description": "Number of products per page (max 100)"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number to fetch"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of matching products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total_count": {
+                      "type": "integer"
+                    },
+                    "products": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "item_name": {
+                            "type": "string"
+                          },
+                          "price": {
+                            "type": "number"
+                          },
+                          "url_rewrite": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["item_name", "price", "url_rewrite"]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid query string"
+          }
+        }
+      }
+    }
+  }
+}

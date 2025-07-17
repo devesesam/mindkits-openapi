@@ -1,0 +1,84 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MindKits Order Statuses",
+    "version": "1.0.0",
+    "description": "Allows Tawk AI to retrieve a list of all order statuses using a POST request."
+  },
+  "servers": [
+    {
+      "url": "https://storied-mandazi-dfbdb4.netlify.app/.netlify/functions"
+    }
+  ],
+  "paths": {
+    "/get-order-statuses": {
+      "post": {
+        "summary": "Get all order statuses",
+        "operationId": "getOrderStatuses",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "List of order statuses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total_count": {
+                      "type": "integer",
+                      "description": "Number of statuses returned"
+                    },
+                    "statuses": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": { "type": "integer" },
+                          "name": { "type": "string" },
+                          "is_open": { "type": "boolean" },
+                          "is_declined": { "type": "boolean" },
+                          "is_cancelled": { "type": "boolean" },
+                          "is_shipped": { "type": "boolean" },
+                          "is_fully_refunded": { "type": "boolean" },
+                          "is_partially_refunded": { "type": "boolean" },
+                          "is_partially_shipped": { "type": "boolean" },
+                          "color": { "type": "string" },
+                          "created_at": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "updated_at": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        },
+                        "required": ["id", "name"]
+                      }
+                    }
+                  },
+                  "required": ["total_count", "statuses"]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  }
+}

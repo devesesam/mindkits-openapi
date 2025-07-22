@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "MindKits Product Search",
-    "version": "1.0.3",
-    "description": "Search products from the Cart.com API using the 'like:' syntax (e.g. like:bambu)."
+    "title": "MindKits Product Search (Direct)",
+    "version": "1.2.0",
+    "description": "Search MindKits products from Cart.com using a keyword. Tawk must format `item_name=like:keyword` in the query string."
   },
   "servers": [
     {
@@ -13,14 +13,14 @@
   "paths": {
     "/products": {
       "get": {
-        "summary": "Search for products by name",
+        "summary": "Find products by name keyword",
         "operationId": "getProducts",
         "parameters": [
           {
             "name": "item_name",
             "in": "query",
             "required": true,
-            "description": "Search keyword using 'like:' syntax (e.g. like:bambu)",
+            "description": "Search keyword for product names. Use format `like:bambu`, `like:adapter`, etc.",
             "schema": {
               "type": "string",
               "example": "like:bambu"
@@ -29,15 +29,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful product match",
+            "description": "Matching products",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "total_count": {
-                      "type": "integer"
-                    },
+                    "total_count": { "type": "integer" },
                     "products": {
                       "type": "array",
                       "items": {
@@ -55,7 +53,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized – Check your API key"
+            "description": "Unauthorized"
           }
         },
         "security": [

@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "MindKits Product Search (Direct)",
-    "version": "1.1.3",
-    "description": "Search MindKits products directly from Cart.com using a keyword (e.g. 'bambu') via query string. Supports filtering with 'like:' syntax."
+    "title": "MindKits Product Search",
+    "version": "1.0.3",
+    "description": "Search products from the Cart.com API using the 'like:' syntax (e.g. like:bambu)."
   },
   "servers": [
     {
@@ -13,28 +13,31 @@
   "paths": {
     "/products": {
       "get": {
-        "summary": "Search products by keyword",
+        "summary": "Search for products by name",
         "operationId": "getProducts",
         "parameters": [
           {
             "name": "item_name",
             "in": "query",
             "required": true,
-            "description": "Keyword filter using 'like:' (e.g. like:bambu)",
+            "description": "Search keyword using 'like:' syntax (e.g. like:bambu)",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "like:bambu"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Filtered list of products",
+            "description": "Successful product match",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "total_count": { "type": "integer" },
+                    "total_count": {
+                      "type": "integer"
+                    },
                     "products": {
                       "type": "array",
                       "items": {
@@ -43,8 +46,7 @@
                           "item_name": { "type": "string" },
                           "price": { "type": "number" },
                           "url_rewrite": { "type": "string" }
-                        },
-                        "required": ["item_name", "price", "url_rewrite"]
+                        }
                       }
                     }
                   }
@@ -53,10 +55,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized - API key missing or incorrect"
-          },
-          "500": {
-            "description": "Server error"
+            "description": "Unauthorized – Check your API key"
           }
         },
         "security": [

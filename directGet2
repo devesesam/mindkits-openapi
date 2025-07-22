@@ -1,0 +1,89 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MindKits Product Search (Direct)",
+    "version": "1.1.2",
+    "description": "Search MindKits products directly from Cart.com using a keyword (e.g. 'bambu') via a query string. Supports filtering with 'like:' syntax."
+  },
+  "servers": [
+    {
+      "url": "https://www.mindkits.co.nz/api/v1"
+    }
+  ],
+  "paths": {
+    "/products": {
+      "get": {
+        "summary": "Search products by keyword",
+        "operationId": "getProducts",
+        "parameters": [
+          {
+            "name": "item_name",
+            "in": "query",
+            "required": true,
+            "description": "Keyword filter using 'like:' (e.g. like:bambu)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Filtered list of products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total_count": { "type": "integer" },
+                    "products": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "item_name": { "type": "string" },
+                          "price": { "type": "number" },
+                          "url_rewrite": { "type": "string" }
+                        },
+                        "required": ["item_name", "price", "url_rewrite"]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - API key missing or incorrect"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {},
+  "x-headers": [
+    {
+      "name": "X-AC-Auth-Token",
+      "value": "5ff793a4072fc4482937a02cfbd802a6"
+    }
+  ]
+}

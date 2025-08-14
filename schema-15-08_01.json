@@ -2,14 +2,10 @@
   "openapi": "3.0.0",
   "info": {
     "title": "MindKits Product Search",
-    "version": "1.3.2",
-    "description": "Allows Tawk AI to search MindKits products by keyword using a POST request with a JSON body. The response includes only title, price, and URL."
+    "version": "1.3.3",
+    "description": "Allows Tawk AI to search MindKits products by keyword using a POST request with a JSON body. The response includes title, price, URL, and a plain-text long_description_1."
   },
-  "servers": [
-    {
-      "url": "https://storied-mandazi-dfbdb4.netlify.app/.netlify/functions"
-    }
-  ],
+  "servers": [{ "url": "https://storied-mandazi-dfbdb4.netlify.app/.netlify/functions" }],
   "paths": {
     "/get-products": {
       "post": {
@@ -45,44 +41,30 @@
                       "description": "Total number of matching products"
                     },
                     "products": {
-  "type": "array",
-  "items": {
-    "type": "object",
-    "properties": {
-      "title": {
-        "type": "string",
-        "description": "Name of the product"
-      },
-      "price": {
-        "type": "number",
-        "description": "Price of the product"
-      },
-      "url": {
-        "type": "string",
-        "format": "uri",
-        "description": "URL to the product page"
-      },
-      "long_description_1": {
-        "type": "string",
-        "description": "Plain text long description of the product"
-      }
-    },
-    "required": ["title", "price", "url", "long_description_1"],
-    "additionalProperties": false
-  }
-}
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": { "type": "string", "description": "Name of the product" },
+                          "price": { "type": "number", "description": "Price of the product" },
+                          "url":   { "type": "string", "format": "uri", "description": "URL to the product page" },
+                          "long_description_1": {
+                            "type": "string",
+                            "description": "Plain-text long description (HTML stripped, truncated to ~800 chars)."
+                          }
+                        },
+                        "required": ["title", "price", "url"],
+                        "additionalProperties": false
+                      }
+                    }
                   },
-                  "required": ["total_count", "products"]
+                  "required": ["title", "price", "url", "long_description_1"]
                 }
               }
             }
           },
-          "400": {
-            "description": "Invalid request body"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
+          "400": { "description": "Invalid request body" },
+          "500": { "description": "Internal server error" }
         }
       }
     }

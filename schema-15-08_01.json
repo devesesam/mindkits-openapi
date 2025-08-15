@@ -64,7 +64,7 @@
                           },
                           "long_description_1": {
                             "type": "string",
-                            "description": "Plain-text long description (HTML stripped, truncated to ~800 chars)."
+                            "description": "Description of the product"
                           }
                         },
                         "required": ["title", "price", "url", "long_description_1"],
